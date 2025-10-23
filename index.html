@@ -107,7 +107,23 @@
       @keyframes fade-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
       @keyframes fade-out{from{opacity:1}to{opacity:0}}
     }
-  </style>
+  
+    /* Mobile nav */
+    .menu-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #ffffff22;border-radius:12px;background:#0f2522;color:#fff}
+    .menu-toggle svg{width:22px;height:22px;display:block}
+    .mobile-menu{position:fixed;inset:66px 0 auto 0;background:rgba(10,26,24,.98);backdrop-filter:var(--blur);border-top:1px solid #ffffff12;box-shadow:0 10px 30px rgba(0,0,0,.35);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease}
+    .mobile-menu.open{opacity:1;transform:none;pointer-events:auto}
+    .mobile-menu ul{list-style:none;margin:0;padding:10px;display:grid;gap:8px}
+    .mobile-menu a{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:#0f211e;border:1px solid #ffffff12;font-weight:600}
+    .mobile-menu a:active{transform:scale(.99)}
+    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .18s ease}
+    .backdrop.show{opacity:1;pointer-events:auto}
+    @media (max-width:768px){
+      nav{display:none}
+      .cta-btn{display:none}
+      .menu-toggle{display:inline-flex}
+    }
+    </style>
 </head>
 <body>
   <header>
@@ -116,6 +132,11 @@
         <img class="logo" alt="s Beauty Barber" src="sbeauty-logo.png"/>
         <h1>s Beauty Barber</h1>
       </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 6h16M4 12h16M10 18h10"/>
+        </svg>
+      </button>
       <nav>
         <ul>
           <li><a data-link href="/" class="nav-link">Home<div class="ripple"></div></a></li>
@@ -127,7 +148,18 @@
       </nav>
       <a data-link href="/booking" class="cta-btn">Book now</a>
     </div>
-  </header>
+  
+  <div class="backdrop" id="menuBackdrop"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul>
+      <li><a data-link href="/">Home</a></li>
+      <li><a data-link href="/services">Services</a></li>
+      <li><a data-link href="/prices">Prices</a></li>
+      <li><a data-link href="/booking">Book</a></li>
+      <li><a data-link href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
   <main id="app"></main>
 
@@ -350,6 +382,35 @@
     }
 
     function attachInteractions(){
+      const toggle = document.getElementById('menuToggle');
+      const sheet = document.getElementById('mobileMenu');
+      const backdrop = document.getElementById('menuBackdrop');
+      function openMenu(){
+        if(!toggle||!sheet) return;
+        sheet.classList.add('open'); backdrop.classList.add('show');
+        toggle.setAttribute('aria-expanded','true'); sheet.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
+      }
+      function closeMenu(){
+        if(!toggle||!sheet) return;
+        sheet.classList.remove('open'); backdrop.classList.remove('show');
+        toggle.setAttribute('aria-expanded','false'); sheet.setAttribute('aria-hidden','true');
+        document.body.style.overflow='';
+      }
+      if(toggle){ toggle.onclick = (e)=>{
+        const isOpen = sheet && sheet.classList.contains('open');
+        if(isOpen) closeMenu(); else openMenu();
+        e.stopPropagation();
+      };}
+      if(backdrop){ backdrop.onclick = closeMenu; }
+      window.addEventListener('resize', ()=>{ if(innerWidth>768) closeMenu(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+
+      // Close on in-app navigation
+      document.querySelectorAll('.mobile-menu a[data-link]').forEach(a=>{
+        a.addEventListener('click', ()=> closeMenu());
+      });
+
       document.querySelectorAll('.nav-link').forEach(link=>{
         link.addEventListener('click', (e)=>{
           const r = link.querySelector('.ripple');
@@ -368,6 +429,8 @@
     window.addEventListener('popstate', ()=> navigate(location.pathname, true));
 
     function navigate(path, fromPop){
+      const sheet = document.getElementById('mobileMenu'); const bd = document.getElementById('menuBackdrop');
+      if(sheet){ sheet.classList.remove('open'); } if(bd){ bd.classList.remove('show'); } document.body.style.overflow='';
       const go = ()=>{ if(!fromPop) history.pushState({}, '', path); render(path); };
       const vt = document.startViewTransition ? document.startViewTransition(go) : null;
       if(!vt) go();
