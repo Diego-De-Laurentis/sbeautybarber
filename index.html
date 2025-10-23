@@ -115,7 +115,21 @@
       @keyframes fade-out{from{opacity:1}to{opacity:0}}
     }
     .reviews-card{background:var(--panel);border:1px solid #ffffff10;border-radius:var(--radius);padding:1rem;min-height:160px}
-    .star{display:inline-block;width:18px;height:18px;mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3L22 9.3l-5 4.5L18 21l-6-3.6L6 21l1-7.2L2 9.3l7.1-1L12 2z"/></svg>') no-repeat center/contain;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .star{display:inline-block;width:18px;height:18px;mask:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M12 2l2.9 6.3L22 9.3l-5 4.5L18 21l-6-3.6L6 21l1-7.2L2 9.3l7.1-1L12 2z\"/></svg>') no-repeat center/contain;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    /* Pricing styles */
+    .pricing{display:grid;grid-template-columns:1.25fr .75fr;gap:1.1rem}
+    .price-card{background:radial-gradient(1200px 400px at -10% -40%, #ffd7a10a, #0000), var(--panel);border:1px solid #ffffff14;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+    .price-card h4{margin:.2rem 0 1rem;font:700 1.4rem/1.2 Playfair Display,serif}
+    .price-item{display:flex;gap:.8rem;align-items:center;padding:.65rem .55rem;border-radius:12px;border:1px solid #ffffff0e;background:#0f211e}
+    .price-item + .price-item{margin-top:.55rem}
+    .price-name{font-weight:600}
+    .price-time{margin-left:auto;font-size:.85rem;color:var(--muted)}
+    .price-tag{margin-left:.5rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#1a1a1a;font-weight:800;padding:.2rem .6rem;border-radius:10px}
+    .subtle{color:var(--muted);font-size:.95rem}
+    .divider{height:1px;background:#ffffff14;margin:1rem 0;border-radius:1px}
+    .note{display:flex;gap:.6rem;align-items:flex-start;background:#0e221f;border:1px dashed #ffffff2a;padding:.8rem 1rem;border-radius:14px}
+    .badge-pill{display:inline-block;padding:.15rem .5rem;border-radius:999px;border:1px solid #ffffff26;color:#e7f0ee;font-size:.78rem}
+    .legend{display:flex;gap:.5rem;flex-wrap:wrap}
   </style>
 </head>
 <body>
@@ -221,54 +235,64 @@
         </div>
       </div>
     </section>
-
-    <!-- Google Reviews -->
-    <section class="view active">
-      <div class="container">
-        <h3 class="section-title">Google Reviews</h3>
-        <p class="muted">Live reviews fetched from Google if an API key and Place ID are configured. Otherwise a map card and a link are shown.</p>
-        <div id="reviews-summary" class="card hover-rise" style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
-          <div style="font-size:2rem" aria-label="Average rating"><span id="avg-rating">—</span><span style="font-size:1rem">/ 5</span></div>
-          <div id="avg-stars" aria-hidden="true" style="letter-spacing:.5px"></div>
-          <div class="muted" id="ratings-total">No reviews yet</div>
-        </div>
-        <div id="reviews-list" class="reviews-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"></div>
-        <div id="reviews-fallback" class="card hover-rise" style="margin-top:12px">
-          <iframe class="map" loading="lazy" style="height:280px" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=s%20Beauty%20Barber%2C%2035%20Xavier%20Brasseur%20Esch-sur-Alzette&output=embed"></iframe>
-          <p class="muted" style="margin:.6rem 0 0">Open the public reviews on Google Maps: <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=s+Beauty+Barber+Esch-sur-Alzette">See reviews</a></p>
-        </div>
-      </div>
-    </section>
   `,
   '/prices': `
     <section class="view active">
-      <div class="container">
-        <h3 class="section-title">Prices</h3>
-        <table class="price-table">
-          <tr><td>Coupe Homme</td><td>25 €</td></tr>
-          <tr><td>Coupe Homme & Shampoing</td><td>26 €</td></tr>
-          <tr><td>Coupe Tondeuse</td><td>22 €</td></tr>
-          <tr><td>Design Cheveux</td><td>5 €</td></tr>
-          <tr><td>Coloration Homme</td><td>35 €</td></tr>
-          <tr><td>Mèches</td><td>60 €</td></tr>
-          <tr><td>Patine</td><td>40 €</td></tr>
-          <tr><td>Décoloration</td><td>20 €</td></tr>
-          <tr><td>Lissage Kératine</td><td>70 €</td></tr>
-          <tr><td>Permanente Homme</td><td>60 €</td></tr>
-          <tr><td>Soin Botox</td><td>60 €</td></tr>
-          <tr><td>Coupe Étudiant</td><td>22 €</td></tr>
-          <tr><td>Coupe Enfant (1–10 ans)</td><td>18 €</td></tr>
-          <tr><td>Barbe Tondeuse</td><td>14 €</td></tr>
-          <tr><td>Barbe Contours</td><td>20 €</td></tr>
-          <tr><td>Coloration Barbe</td><td>20 €</td></tr>
-          <tr><td>Barbe Complète</td><td>23 €</td></tr>
-          <tr><td>Épilation Sourcils Fil</td><td>15 €</td></tr>
-          <tr><td>Masque Noir Visage</td><td>10 €</td></tr>
-        </table>
-        <p class="muted" style="margin-top:.6rem">Subject to change. Latest prices on Salonkee.</p>
+      <div class="container pricing">
+        <div class="price-card hover-rise">
+          <div class="legend" style="margin-bottom:.6rem">
+            <span class="badge-pill">Hair</span>
+            <span class="badge-pill">Beard</span>
+            <span class="badge-pill">Color & Care</span>
+            <span class="badge-pill">Kids & Students</span>
+          </div>
+          <h4>Popular services</h4>
+          <div class="price-item">
+            <span class="price-name">Coupe Homme</span>
+            <span class="price-tag">25 €</span>
+            <span class="price-time">30–45 min</span>
+          </div>
+          <div class="price-item">
+            <span class="price-name">Coupe Homme & Shampoing</span>
+            <span class="price-tag">26 €</span>
+            <span class="price-time">45–60 min</span>
+          </div>
+          <div class="price-item">
+            <span class="price-name">Coupe Tondeuse</span>
+            <span class="price-tag">22 €</span>
+            <span class="price-time">25–30 min</span>
+          </div>
+          <div class="divider"></div>
+          <h4>Beard</h4>
+          <div class="price-item"><span class="price-name">Barbe Tondeuse</span><span class="price-tag">14 €</span><span class="price-time">40–60 min</span></div>
+          <div class="price-item"><span class="price-name">Barbe Contours</span><span class="price-tag">20 €</span><span class="price-time">40–60 min</span></div>
+          <div class="price-item"><span class="price-name">Barbe Complète</span><span class="price-tag">23 €</span><span class="price-time">40–60 min</span></div>
+        </div>
+
+        <aside class="price-card hover-rise">
+          <h4>Color & Treatments</h4>
+          <div class="price-item"><span class="price-name">Coloration Homme</span><span class="price-tag">35 €</span></div>
+          <div class="price-item"><span class="price-name">Mèches</span><span class="price-tag">60 €</span></div>
+          <div class="price-item"><span class="price-name">Patine</span><span class="price-tag">40 €</span></div>
+          <div class="price-item"><span class="price-name">Décoloration</span><span class="price-tag">20 €</span></div>
+          <div class="price-item"><span class="price-name">Lissage Kératine</span><span class="price-tag">70 €</span></div>
+          <div class="price-item"><span class="price-name">Permanente Homme</span><span class="price-tag">60 €</span></div>
+          <div class="price-item"><span class="price-name">Soin Botox</span><span class="price-tag">60 €</span></div>
+          <div class="divider"></div>
+          <h4>Kids & Students</h4>
+          <div class="price-item"><span class="price-name">Coupe Étudiant</span><span class="price-tag">22 €</span></div>
+          <div class="price-item"><span class="price-name">Coupe Enfant (1–10 ans)</span><span class="price-tag">18 €</span></div>
+          <div class="divider"></div>
+          <h4>Extras</h4>
+          <div class="price-item"><span class="price-name">Design Cheveux</span><span class="price-tag">5 €</span></div>
+          <div class="price-item"><span class="price-name">Coloration Barbe</span><span class="price-tag">20 €</span></div>
+          <div class="price-item"><span class="price-name">Épilation Sourcils Fil</span><span class="price-tag">15 €</span></div>
+          <div class="price-item"><span class="price-name">Masque Noir Visage</span><span class="price-tag">10 €</span></div>
+          <p class="subtle" style="margin:.9rem 0 0">Subject to change. Latest prices on Salonkee.</p>
+        </aside>
       </div>
     </section>
-  `,
+`,
   '/booking': `
     <section class="view active">
       <div class="container booking">
@@ -323,6 +347,7 @@
 };
 
     const routes = Object.keys(Views);
+console.assert(routes.length===5, 'Routes count should be 5');
 
 // Smoke tests
 (function(){
@@ -400,11 +425,7 @@
             this.reset();
           }, 900);
         }, { once: true });
-      }
-
-      // If Google API is available, try to fetch reviews
-      if(window.google && google.maps && google.maps.places){ initGoogleReviews(); }
-    }
+      }    }
 
     window.addEventListener('click', onNav);
     window.addEventListener('popstate', ()=> navigate(location.pathname, true));
@@ -425,56 +446,6 @@
     // Initial render
     if(!routes.includes(location.pathname)) history.replaceState({}, '', '/');
     render(location.pathname);
-      // Google Reviews integration
-    // 1) Add your Google Maps JS API key by adding this tag in <head>:
-    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&libraries=places" defer></script>
-    // 2) Replace PLACE_ID below with your business Place ID. Get it from Google Place ID Finder.
-    const GOOGLE_PLACE_ID = 'PLACE_ID_HERE';
-
-    function renderStars(container, rating){
-      const full = Math.floor(rating||0), half = (rating - full) >= 0.5;
-      container.innerHTML = '';
-      for(let i=0;i<5;i++){
-        const s = document.createElement('span'); s.className='star';
-        s.style.opacity = i < full ? 1 : (i===full && half ? .5 : .2);
-        container.appendChild(s);
-      }
-    }
-
-    function initGoogleReviews(){
-      if(!GOOGLE_PLACE_ID || GOOGLE_PLACE_ID==='PLACE_ID_HERE') return; // keep fallback visible
-      const service = new google.maps.places.PlacesService(document.createElement('div'));
-      service.getDetails({placeId: GOOGLE_PLACE_ID, fields: ['name','rating','user_ratings_total','reviews']}, (place, status)=>{
-        if(status !== google.maps.places.PlacesServiceStatus.OK || !place) return;
-        const avg = place.rating || 0; const total = place.user_ratings_total || 0;
-        document.getElementById('avg-rating').textContent = avg.toFixed(1);
-        document.getElementById('ratings-total').textContent = total + ' Google reviews';
-        renderStars(document.getElementById('avg-stars'), avg);
-
-        const list = document.getElementById('reviews-list');
-        list.innerHTML = '';
-        const reviews = (place.reviews||[]).slice().sort((a,b)=> (b.time||0)-(a.time||0)).slice(0,6);
-        reviews.forEach(r=>{
-          const card = document.createElement('div'); card.className='reviews-card hover-rise';
-          const head = document.createElement('div'); head.style.display='flex'; head.style.justifyContent='space-between'; head.style.alignItems='center';
-          const who = document.createElement('strong'); who.textContent = r.author_name || 'Anonymous';
-          const stars = document.createElement('div'); renderStars(stars, r.rating||0);
-          head.appendChild(who); head.appendChild(stars); card.appendChild(head);
-          const text = document.createElement('p'); text.className='muted'; text.style.marginTop='.6rem';
-          const full = r.text || '';
-          const short = full.length>260 ? full.slice(0,260)+'…' : full;
-          text.textContent = short; card.appendChild(text);
-          if(full.length>260){
-            const btn = document.createElement('button'); btn.textContent='Read more'; btn.className='cta-btn'; btn.style.padding='.35rem .6rem'; btn.style.fontWeight='600'; btn.style.fontSize='.9rem'; btn.addEventListener('click',()=>{ text.textContent = full; btn.remove(); }); card.appendChild(btn);
-          }
-          list.appendChild(card);
-        });
-
-        // hide fallback map if we have reviews
-        if(reviews.length){ const fb = document.getElementById('reviews-fallback'); if(fb) fb.style.display='none'; }
-      });
-    }
-
     </script>
 </body>
 </html>
