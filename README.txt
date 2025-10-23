@@ -1,10 +1,7 @@
 
 s Beauty Barber — static SPA
-
-Files
+Files:
 - index.html
-- sbeauty-logo-sand@96h.png, @192h.png, @288h.png
-
-Notes
-- For SPA routing on static hosts, route all paths to /index.html.
-- Update GOOGLE_PLACE_ID in the script if you enable Google reviews.
+- sbeauty-full-logo-sand@48h.png, @96h.png, @128h.png
+Notes:
+- Host as a static site. Route all paths to /index.html for SPA routing.

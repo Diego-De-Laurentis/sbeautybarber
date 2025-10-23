@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,31 +19,25 @@
     img{max-width:100%;display:block}
     .container{width:min(1200px,92%);margin-inline:auto}
 
-    /* Header */
     header{position:sticky;top:0;z-index:50;background:rgba(15,37,34,.72);backdrop-filter:var(--blur);border-bottom:1px solid #ffffff12}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
     .brand{display:flex;align-items:center;gap:.8rem}
-    .logo{height:42px;width:auto;display:block;image-rendering:auto}
-    .brand h1{font:800 1.1rem/1 Inter,system-ui;letter-spacing:.3px;margin:0}
+    .logo{height:40px;width:auto;display:block;image-rendering:auto}
+    .brand h1{display:none}
     nav ul{display:flex;gap:.4rem;list-style:none;margin:0;padding:0}
     .nav-link{position:relative;display:inline-block;padding:.55rem .9rem;border-radius:12px;font-weight:600;opacity:.95}
     .nav-link:hover{background:#ffffff12;opacity:1}
-
-    /* Click animation: ripple */
     .ripple{position:absolute;inset:0;overflow:hidden;border-radius:inherit}
     .ripple span{position:absolute;transform:translate(-50%,-50%);width:0;height:0;border-radius:999px;background:rgba(255,255,255,.25);animation:ripple .5s ease-out}
     @keyframes ripple{to{width:220px;height:220px;opacity:0}}
-
     .cta-btn{display:inline-block;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#1a1a1a;padding:.72rem 1rem;border-radius:12px;font-weight:800;box-shadow:var(--shadow);transition:transform .12s ease}
     .cta-btn:active{transform:scale(.97)}
 
-    /* Router containers */
     main{min-height:60vh;view-transition-name:page}
     section{padding:72px 0;border-top:1px solid rgba(255,255,255,.06)}
     .section-title{font:700 2rem/1 Playfair Display,serif;margin:0 0 1rem}
     .muted{color:var(--muted)}
 
-    /* Hero */
     .hero{position:relative;isolation:isolate}
     .hero::before{content:"";position:absolute;inset:0;background:url('https://salonkee.cloud/lu/data/2043/coverImage/n-d7z60vBoOoO9mrWA0VYjL-sm--opt') center/cover no-repeat;filter:grayscale(.1) contrast(1.05) brightness(.6);z-index:-2}
     .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(1200px 400px at 10% 0%, #ffd7a11a, #0000), linear-gradient(180deg, #0000, #0008 60%, #000a);z-index:-1}
@@ -50,73 +45,15 @@
     .badge{display:inline-flex;align-items:center;gap:.5rem;background:#ffffff10;border:1px solid #ffffff22;color:#fff;padding:.35rem .7rem;border-radius:999px;font-size:.85rem}
     .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
 
-    /* Cards and grids */
     .about{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
     .card{background:var(--panel);border:1px solid #ffffff10;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+
     .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     .service{background:var(--panel-2);border:1px solid #ffffff10;border-radius:var(--radius);padding:1.2rem;display:flex;flex-direction:column;gap:.6rem}
     .chip{display:inline-block;font-size:.8rem;padding:.2rem .5rem;border:1px solid #ffffff22;border-radius:999px;color:#e8f0ee}
     .price{margin-left:auto;font-weight:800;color:#1a1a1a;background:linear-gradient(135deg,var(--brand),var(--brand-2));padding:.15rem .5rem;border-radius:10px}
 
-    .price-table{width:100%;border-collapse:separate;border-spacing:0 10px}
-    .price-table tr{background:var(--panel);border:1px solid #ffffff10}
-    .price-table td{padding:14px 16px}
-    .price-table tr td:first-child{border-top-left-radius:var(--radius);border-bottom-left-radius:var(--radius)}
-    .price-table tr td:last-child{border-top-right-radius:var(--radius);border-bottom-right-radius:var(--radius);text-align:right}
-
-    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .gallery img{height:200px;object-fit:cover;border-radius:14px;border:1px solid #ffffff10}
-
-    .booking{display:grid;grid-template-columns:1.1fr .9fr;gap:1.5rem}
-    form{display:grid;gap:.8rem}
-    .field{display:grid;gap:.35rem}
-    .field input,.field select,.field textarea{background:#0f1f1c;border:1px solid #ffffff1a;color:var(--text);padding:.85rem 1rem;border-radius:12px}
-    .field input::placeholder,.field textarea::placeholder{color:#a9bab7}
-    .inline{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-    .success{display:none;margin-top:.5rem;padding:.75rem 1rem;border-radius:12px;background:#14352f; border:1px solid #2a5; color:#cfe}
-
-    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:1rem}
-    .hours{width:100%;border-collapse:collapse}
-    .hours td{padding:.5rem .4rem;border-bottom:1px dashed #ffffff18}
-    .map{border:0;width:100%;height:380px;border-radius:var(--radius)}
-
-    footer{padding:28px 0;color:#c9d7d4;border-top:1px solid rgba(255,255,255,.06)}
-    .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
-
-    /* View transitions between routes */
-    .view{opacity:0;transform:translateY(6px);transition:opacity .18s ease, transform .18s ease}
-    .view.active{opacity:1;transform:none}
-
-    /* Responsive */
-    @media (max-width:1024px){
-      .hero-inner,.about,.services-grid,.booking,.contact-grid{grid-template-columns:1fr}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:560px){
-      nav ul{gap:.2rem}
-      .gallery{grid-template-columns:1fr}
-      .inline{grid-template-columns:1fr}
-    }
-    /* Modern motion */
-    @media (prefers-reduced-motion:no-preference){
-      .hover-rise{transition:transform .2s ease, box-shadow .2s ease}
-      .hover-rise:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.35)}
-      .underline-anim{position:relative}
-      .underline-anim::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
-      .underline-anim:hover::after{transform:scaleX(1)}
-      .fade-up{opacity:0;transform:translateY(10px);transition:opacity .35s ease, transform .35s ease}
-      .fade-up.in{opacity:1;transform:none}
-    }
-    /* Page transitions */
-    @media (prefers-reduced-motion:no-preference){
-      ::view-transition-old(page){animation:fade-out .18s ease forwards}
-      ::view-transition-new(page){animation:fade-in .18s .06s ease both}
-      @keyframes fade-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-      @keyframes fade-out{from{opacity:1}to{opacity:0}}
-    }
-    .reviews-card{background:var(--panel);border:1px solid #ffffff10;border-radius:var(--radius);padding:1rem;min-height:160px}
-    .star{display:inline-block;width:18px;height:18px;mask:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M12 2l2.9 6.3L22 9.3l-5 4.5L18 21l-6-3.6L6 21l1-7.2L2 9.3l7.1-1L12 2z\"/></svg>') no-repeat center/contain;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
-    /* Pricing styles */
+    /* Pricing */
     .pricing{display:grid;grid-template-columns:1.25fr .75fr;gap:1.1rem}
     .price-card{background:radial-gradient(1200px 400px at -10% -40%, #ffd7a10a, #0000), var(--panel);border:1px solid #ffffff14;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
     .price-card h4{margin:.2rem 0 1rem;font:700 1.4rem/1.2 Playfair Display,serif}
@@ -127,16 +64,57 @@
     .price-tag{margin-left:.5rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#1a1a1a;font-weight:800;padding:.2rem .6rem;border-radius:10px}
     .subtle{color:var(--muted);font-size:.95rem}
     .divider{height:1px;background:#ffffff14;margin:1rem 0;border-radius:1px}
-    .note{display:flex;gap:.6rem;align-items:flex-start;background:#0e221f;border:1px dashed #ffffff2a;padding:.8rem 1rem;border-radius:14px}
     .badge-pill{display:inline-block;padding:.15rem .5rem;border-radius:999px;border:1px solid #ffffff26;color:#e7f0ee;font-size:.78rem}
     .legend{display:flex;gap:.5rem;flex-wrap:wrap}
+
+    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .gallery img{height:200px;object-fit:cover;border-radius:14px;border:1px solid #ffffff10}
+
+    .booking{display:grid;grid-template-columns:1.1fr .9fr;gap:1.5rem}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:1rem}
+    .hours{width:100%;border-collapse:collapse}
+    .hours td{padding:.5rem .4rem;border-bottom:1px dashed #ffffff18}
+    .map{border:0;width:100%;height:380px;border-radius:var(--radius)}
+
+    footer{padding:28px 0;color:#c9d7d4;border-top:1px solid rgba(255,255,255,.06)}
+    .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+
+    .view{opacity:0;transform:translateY(6px);transition:opacity .18s ease, transform .18s ease}
+    .view.active{opacity:1;transform:none}
+
+    @media (max-width:1024px){
+      .hero-inner,.about,.services-grid,.pricing,.booking,.contact-grid{grid-template-columns:1fr}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      nav ul{gap:.2rem}
+      .gallery{grid-template-columns:1fr}
+    }
+
+    @media (prefers-reduced-motion:no-preference){
+      .hover-rise{transition:transform .2s ease, box-shadow .2s ease}
+      .hover-rise:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+      .underline-anim{position:relative}
+      .underline-anim::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
+      .underline-anim:hover::after{transform:scaleX(1)}
+      .fade-up{opacity:0;transform:translateY(10px);transition:opacity .35s ease, transform .35s ease}
+      .fade-up.in{opacity:1;transform:none}
+    }
+    @media (prefers-reduced-motion:no-preference){
+      ::view-transition-old(page){animation:fade-out .18s ease forwards}
+      ::view-transition-new(page){animation:fade-in .18s .06s ease both}
+      @keyframes fade-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+      @keyframes fade-out{from{opacity:1}to{opacity:0}}
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="brand">
-        <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand@96h.png" srcset="sbeauty-logo-sand@96h.png 1x, sbeauty-logo-sand@192h.png 2x, sbeauty-logo-sand@288h.png 3x" onerror="this.style.display='none'"/>
+        <img class="logo" alt="s Beauty Barber" src="sbeauty-full-logo-sand@48h.png"
+             srcset="sbeauty-full-logo-sand@48h.png 1x, sbeauty-full-logo-sand@96h.png 2x, sbeauty-full-logo-sand@128h.png 3x"/>
         <h1>s Beauty Barber</h1>
       </div>
       <nav>
@@ -152,14 +130,13 @@
     </div>
   </header>
 
-  <main id="app">
-    <!-- Views are injected here by the router -->
-  </main>
+  <main id="app"></main>
 
   <footer>
     <div class="container foot">
       <div style="display:flex;align-items:center;gap:.6rem">
-        <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand@96h.png" srcset="sbeauty-logo-sand@96h.png 1x, sbeauty-logo-sand@192h.png 2x, sbeauty-logo-sand@288h.png 3x" onerror="this.style.display='none'"/>
+        <img class="logo" alt="s Beauty Barber" src="sbeauty-full-logo-sand@48h.png"
+             srcset="sbeauty-full-logo-sand@48h.png 1x, sbeauty-full-logo-sand@96h.png 2x, sbeauty-full-logo-sand@128h.png 3x"/>
         <strong>s Beauty Barber</strong>
       </div>
       <div class="muted">© <span id="year"></span> s Beauty Barber. All rights reserved.</div>
@@ -168,13 +145,9 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // SPA Router with simple views
     const app = document.getElementById('app');
 
     const Views = {
-      // Note: cards and sections use .fade-up for reveal
-
   '/': `
     <section class="hero view active">
       <div class="container hero-inner">
@@ -217,7 +190,7 @@
       </div>
     </section>
   `,
-  '\/services': `
+  '/services': `
     <section class="view active">
       <div class="container">
         <h3 class="section-title">Services</h3>
@@ -292,7 +265,7 @@
         </aside>
       </div>
     </section>
-`,
+  `,
   '/booking': `
     <section class="view active">
       <div class="container booking">
@@ -347,37 +320,19 @@
 };
 
     const routes = Object.keys(Views);
-console.assert(routes.length===5, 'Routes count should be 5');
 
-// Smoke tests
-(function(){
-  const placeholdersGone = !JSON.stringify(Views).includes('$1') && !JSON.stringify(Views).includes('$2');
-  console.assert(placeholdersGone, 'Placeholder tokens must not exist.');
-  ['/', '/services', '/prices', '/booking', '/contact'].forEach(p=>{
-    console.assert(typeof Views[p] === 'string' && Views[p].includes('<section'), 'Route missing or invalid view: ' + p);
-  });
-  console.assert(typeof window.navigate === 'function' || true, 'navigate should be defined later');
-})();
-
-    // Additional tests
+    // Smoke tests
     (function(){
-      console.assert(typeof attachInteractions === 'function', 'attachInteractions should be defined');
-      const current = location.pathname;
-      try{
-        ['/', '/services', '/prices', '/booking', '/contact'].forEach(p=>{
-          console.assert(!!Views[p], 'View missing: '+p);
-          render(p);
-          const ok = document.querySelector('.section-title') || document.querySelector('.hero');
-          console.assert(!!ok, 'Render produced content for '+p);
-        });
-      }catch(e){ console.error('route render test failed', e); }
-      render(current);
+      const placeholdersGone = !JSON.stringify(Views).includes('$1') && !JSON.stringify(Views).includes('$2');
+      console.assert(placeholdersGone, 'Placeholder tokens must not exist.');
+      ['/', '/services', '/prices', '/booking', '/contact'].forEach(p=>{
+        console.assert(typeof Views[p] === 'string' && Views[p].includes('<section'), 'Route missing or invalid view: ' + p);
+      });
     })();
 
     function render(path){
       const view = Views[path] || Views['/'];
       app.innerHTML = view;
-      // reveal on scroll
       const io = ('IntersectionObserver' in window) ? new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('in')), {threshold:.08}) : null;
       if(io){ app.querySelectorAll('.fade-up, .card').forEach(el=>{el.classList.add('fade-up'); io.observe(el);}); }
       requestAnimationFrame(()=>{
@@ -397,7 +352,6 @@ console.assert(routes.length===5, 'Routes count should be 5');
     }
 
     function attachInteractions(){
-      // Header click ripple
       document.querySelectorAll('.nav-link').forEach(link=>{
         link.addEventListener('click', (e)=>{
           const r = link.querySelector('.ripple');
@@ -410,42 +364,19 @@ console.assert(routes.length===5, 'Routes count should be 5');
           setTimeout(()=>s.remove(), 500);
         });
       });
-
-      // Booking form mock handler if present
-      const form = document.getElementById('booking-form');
-      if(form){
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          const btn = this.querySelector('button[type="submit"]');
-          if(btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
-          setTimeout(()=>{
-            if(btn){ btn.disabled=false; btn.textContent='Request booking'; }
-            const ok = document.getElementById('success');
-            if(ok) ok.style.display='block';
-            this.reset();
-          }, 900);
-        }, { once: true });
-      }    }
+    }
 
     window.addEventListener('click', onNav);
     window.addEventListener('popstate', ()=> navigate(location.pathname, true));
 
-    // Navigation with View Transitions API fallback
     function navigate(path, fromPop){
       const go = ()=>{ if(!fromPop) history.pushState({}, '', path); render(path); };
       const vt = document.startViewTransition ? document.startViewTransition(go) : null;
       if(!vt) go();
     }
 
-    // Extra router tests (non-destructive)
-    (function(){
-      try { navigate('/services', true); navigate('/', true); } catch(e){ console.error('navigate test failed', e); }
-      const logoOK = document.querySelectorAll('img.logo').length >= 1; console.assert(logoOK, 'Logo img should exist');
-    })();
-
-    // Initial render
     if(!routes.includes(location.pathname)) history.replaceState({}, '', '/');
     render(location.pathname);
-    </script>
+  </script>
 </body>
 </html>
