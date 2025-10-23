@@ -88,6 +88,9 @@
       .gallery{grid-template-columns:repeat(2,1fr)}
     }
     @media (max-width:560px){
+      /* gallery mobile center */
+      .gallery{grid-template-columns:1fr;justify-items:center}
+      .gallery img{height:auto;width:min(520px,100%)}
       nav ul{gap:.2rem}
       .gallery{grid-template-columns:1fr}
     }
@@ -129,7 +132,7 @@
   <header>
     <div class="container nav">
       <div class="brand">
-        <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand.png"/>
+        <img class="logo" alt="s Beauty Barber" src="Screenshot_20251022_214446.png"/>
         <h1>s Beauty Barber</h1>
       </div>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
@@ -166,7 +169,7 @@
   <footer>
     <div class="container foot">
       <div style="display:flex;align-items:center;gap:.6rem">
-        <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand.png"/>
+        <img class="logo" alt="s Beauty Barber" src="Screenshot_20251022_214446.png"/>
         <strong>s Beauty Barber</strong>
       </div>
       <div class="muted">© <span id="year"></span> s Beauty Barber. All rights reserved.</div>
@@ -429,6 +432,7 @@
     window.addEventListener('popstate', ()=> navigate(location.pathname, true));
 
     function navigate(path, fromPop){
+      if(window.sbbMenu) window.sbbMenu.close();
       const sheet = document.getElementById('mobileMenu'); const bd = document.getElementById('menuBackdrop');
       if(sheet){ sheet.classList.remove('open'); } if(bd){ bd.classList.remove('show'); } document.body.style.overflow='';
       const go = ()=>{ if(!fromPop) history.pushState({}, '', path); render(path); };
@@ -438,6 +442,34 @@
 
     if(!routes.includes(location.pathname)) history.replaceState({}, '', '/');
     render(location.pathname);
+
+    // Robust mobile menu setup
+    (function setupMobileMenu(){
+      const toggle = document.getElementById('menuToggle');
+      const sheet = document.getElementById('mobileMenu');
+      const backdrop = document.getElementById('menuBackdrop');
+      function openMenu(){
+        if(!sheet) return;
+        sheet.classList.add('open'); if(backdrop) backdrop.classList.add('show');
+        if(toggle) toggle.setAttribute('aria-expanded','true');
+        if(sheet) sheet.setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
+      }
+      function closeMenu(){
+        if(!sheet) return;
+        sheet.classList.remove('open'); if(backdrop) backdrop.classList.remove('show');
+        if(toggle) toggle.setAttribute('aria-expanded','false');
+        if(sheet) sheet.setAttribute('aria-hidden','true');
+        document.body.style.overflow='';
+      }
+      window.sbbMenu = { open: openMenu, close: closeMenu };
+      if(toggle){ toggle.addEventListener('click', (e)=>{ e.stopPropagation(); (sheet.classList.contains('open')?closeMenu:openMenu)();}); }
+      if(backdrop){ backdrop.addEventListener('click', closeMenu); }
+      document.addEventListener('click', (e)=>{ if(e.target.closest('.mobile-menu a[data-link]')) closeMenu(); }, true);
+      window.addEventListener('resize', ()=>{ if(innerWidth>768) closeMenu(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
+    })();
+
   </script>
 </body>
 </html>
