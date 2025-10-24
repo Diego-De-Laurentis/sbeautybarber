@@ -28,10 +28,10 @@ nav ul{display:flex;gap:.4rem;list-style:none;margin:0;padding:0}
 .dropdown-wrap{position:relative;display:none}
 .menu-toggle{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #ffffff22;border-radius:12px;background:#0f2522;color:#fff}
 .menu-toggle svg{width:22px;height:22px;display:block}
-.dropdown-menu{position:absolute;left:0;right:0;top:calc(100% + 10px);background:rgba(10,26,24,.98);backdrop-filter:var(--blur);border:1px solid #ffffff18;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.45);padding:8px;display:none}
+.dropdown-menu{position:absolute;left:50%;transform:translateX(-50%);top:calc(100% + 10px);background:rgba(10,26,24,.98);backdrop-filter:var(--blur);border:1px solid #ffffff18;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.45);padding:8px;display:none;min-width:220px;max-width:92vw;width:max-content}
 .dropdown-menu.open{display:block}
 .dropdown-menu ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:#0f211e;border:1px solid #ffffff12;font-weight:600}
+.dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:#0f211e;border:1px solid #ffffff12;font-weight:600;width:100%}
 main{min-height:60vh}
 section{padding:72px 0;border-top:1px solid rgba(255,255,255,.06)}
 .section-title{font:700 2rem/1 Playfair Display,serif;margin:0 0 1rem}
