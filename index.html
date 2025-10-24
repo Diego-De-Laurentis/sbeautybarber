@@ -1,476 +1,147 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>s Beauty Barber — Modern Barbershop</title>
-  <meta name="description" content="Discover s Beauty Barber. View services and prices, book online, and find practical info fast." />
-  <meta name="theme-color" content="#0a1a18" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{--bg:#0a1a18;--panel:#0f2522;--panel-2:#122f2b;--muted:#b7c7c4;--text:#f3f6f5;--brand:#ffd7a1;--brand-2:#f3b97a;--accent:#2d504a;--radius:20px;--shadow:0 10px 30px rgba(0,0,0,.35);--blur:saturate(1.1) blur(8px);}    
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{width:min(1200px,92%);margin-inline:auto}
-
-    header{position:sticky;top:0;z-index:50;background:rgba(15,37,34,.72);backdrop-filter:var(--blur);border-bottom:1px solid #ffffff12}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
-    .brand{display:flex;align-items:center;gap:.8rem}
-    .logo{height:40px;width:auto;display:block;image-rendering:auto}
-    .brand h1{display:none}
-    nav ul{display:flex;gap:.4rem;list-style:none;margin:0;padding:0}
-    .nav-link{position:relative;display:inline-block;padding:.55rem .9rem;border-radius:12px;font-weight:600;opacity:.95}
-    .nav-link:hover{background:#ffffff12;opacity:1}
-    .ripple{position:absolute;inset:0;overflow:hidden;border-radius:inherit}
-    .ripple span{position:absolute;transform:translate(-50%,-50%);width:0;height:0;border-radius:999px;background:rgba(255,255,255,.25);animation:ripple .5s ease-out}
-    @keyframes ripple{to{width:220px;height:220px;opacity:0}}
-    .cta-btn{display:inline-block;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#1a1a1a;padding:.72rem 1rem;border-radius:12px;font-weight:800;box-shadow:var(--shadow);transition:transform .12s ease}
-    .cta-btn:active{transform:scale(.97)}
-
-    main{min-height:60vh;view-transition-name:page}
-    section{padding:72px 0;border-top:1px solid rgba(255,255,255,.06)}
-    .section-title{font:700 2rem/1 Playfair Display,serif;margin:0 0 1rem}
-    .muted{color:var(--muted)}
-
-    .hero{position:relative;isolation:isolate}
-    .hero::before{content:"";position:absolute;inset:0;background:url('https://salonkee.cloud/lu/data/2043/coverImage/n-d7z60vBoOoO9mrWA0VYjL-sm--opt') center/cover no-repeat;filter:grayscale(.1) contrast(1.05) brightness(.6);z-index:-2}
-    .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(1200px 400px at 10% 0%, #ffd7a11a, #0000), linear-gradient(180deg, #0000, #0008 60%, #000a);z-index:-1}
-    .hero-inner{padding:clamp(64px,10vw,120px) 0;display:grid;grid-template-columns:1.15fr .85fr;gap:2rem;align-items:center}
-    .badge{display:inline-flex;align-items:center;gap:.5rem;background:#ffffff10;border:1px solid #ffffff22;color:#fff;padding:.35rem .7rem;border-radius:999px;font-size:.85rem}
-    .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
-
-    .about{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-    .card{background:var(--panel);border:1px solid #ffffff10;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
-
-    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    .service{background:var(--panel-2);border:1px solid #ffffff10;border-radius:var(--radius);padding:1.2rem;display:flex;flex-direction:column;gap:.6rem}
-    .chip{display:inline-block;font-size:.8rem;padding:.2rem .5rem;border:1px solid #ffffff22;border-radius:999px;color:#e8f0ee}
-    .price{margin-left:auto;font-weight:800;color:#1a1a1a;background:linear-gradient(135deg,var(--brand),var(--brand-2));padding:.15rem .5rem;border-radius:10px}
-
-    /* Pricing */
-    .pricing{display:grid;grid-template-columns:1.25fr .75fr;gap:1.1rem}
-    .price-card{background:radial-gradient(1200px 400px at -10% -40%, #ffd7a10a, #0000), var(--panel);border:1px solid #ffffff14;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
-    .price-card h4{margin:.2rem 0 1rem;font:700 1.4rem/1.2 Playfair Display,serif}
-    .price-item{display:flex;gap:.8rem;align-items:center;padding:.65rem .55rem;border-radius:12px;border:1px solid #ffffff0e;background:#0f211e}
-    .price-item + .price-item{margin-top:.55rem}
-    .price-name{font-weight:600}
-    .price-time{margin-left:auto;font-size:.85rem;color:var(--muted)}
-    .price-tag{margin-left:.5rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#1a1a1a;font-weight:800;padding:.2rem .6rem;border-radius:10px}
-    .subtle{color:var(--muted);font-size:.95rem}
-    .divider{height:1px;background:#ffffff14;margin:1rem 0;border-radius:1px}
-    .badge-pill{display:inline-block;padding:.15rem .5rem;border-radius:999px;border:1px solid #ffffff26;color:#e7f0ee;font-size:.78rem}
-    .legend{display:flex;gap:.5rem;flex-wrap:wrap}
-
-    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .gallery img{height:200px;object-fit:cover;border-radius:14px;border:1px solid #ffffff10}
-
-    .booking{display:grid;grid-template-columns:1.1fr .9fr;gap:1.5rem}
-
-    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:1rem}
-    .hours{width:100%;border-collapse:collapse}
-    .hours td{padding:.5rem .4rem;border-bottom:1px dashed #ffffff18}
-    .map{border:0;width:100%;height:380px;border-radius:var(--radius)}
-
-    footer{padding:28px 0;color:#c9d7d4;border-top:1px solid rgba(255,255,255,.06)}
-    .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
-
-    .view{opacity:0;transform:translateY(6px);transition:opacity .18s ease, transform .18s ease}
-    .view.active{opacity:1;transform:none}
-
-    @media (max-width:1024px){
-      .hero-inner,.about,.services-grid,.pricing,.booking,.contact-grid{grid-template-columns:1fr}
-      .gallery{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:560px){
-      /* gallery mobile center */
-      .gallery{grid-template-columns:1fr;justify-items:center}
-      .gallery img{height:auto;width:min(520px,100%)}
-      nav ul{gap:.2rem}
-      .gallery{grid-template-columns:1fr}
-    }
-
-    @media (prefers-reduced-motion:no-preference){
-      .hover-rise{transition:transform .2s ease, box-shadow .2s ease}
-      .hover-rise:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(0,0,0,.35)}
-      .underline-anim{position:relative}
-      .underline-anim::after{content:"";position:absolute;left:12px;right:12px;bottom:8px;height:2px;background:linear-gradient(90deg,var(--brand),var(--brand-2));transform:scaleX(0);transform-origin:left;transition:transform .22s ease}
-      .underline-anim:hover::after{transform:scaleX(1)}
-      .fade-up{opacity:0;transform:translateY(10px);transition:opacity .35s ease, transform .35s ease}
-      .fade-up.in{opacity:1;transform:none}
-    }
-    @media (prefers-reduced-motion:no-preference){
-      ::view-transition-old(page){animation:fade-out .18s ease forwards}
-      ::view-transition-new(page){animation:fade-in .18s .06s ease both}
-      @keyframes fade-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-      @keyframes fade-out{from{opacity:1}to{opacity:0}}
-    }
-  
-    /* Mobile nav */
-    .menu-toggle{display:none;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #ffffff22;border-radius:12px;background:#0f2522;color:#fff}
-    .menu-toggle svg{width:22px;height:22px;display:block}
-    .mobile-menu{position:fixed;inset:66px 0 auto 0;background:rgba(10,26,24,.98);backdrop-filter:var(--blur);border-top:1px solid #ffffff12;box-shadow:0 10px 30px rgba(0,0,0,.35);transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease display:block; z-index:60;}
-    .mobile-menu.open{opacity:1;transform:none;pointer-events:auto}
-    .mobile-menu ul{list-style:none;margin:0;padding:10px;display:grid;gap:8px}
-    .mobile-menu a{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:#0f211e;border:1px solid #ffffff12;font-weight:600}
-    .mobile-menu a:active{transform:scale(.99)}
-    .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .18s ease z-index:55;}
-    .backdrop.show{opacity:1;pointer-events:auto}
-    @media (max-width:768px){
-      header nav{display:none}
-      .cta-btn{display:none}
-      .menu-toggle{display:inline-flex}
-    }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>s Beauty Barber — Modern Barbershop</title>
+<meta name="theme-color" content="#0a1a18">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a1a18;--panel:#0f2522;--panel-2:#122f2b;--muted:#b7c7c4;--text:#f3f6f5;--brand:#ffd7a1;--brand-2:#f3b97a;--radius:20px;--shadow:0 10px 30px rgba(0,0,0,.35);--blur:saturate(1.1) blur(8px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(1200px,92%);margin:0 auto}
+header{position:sticky;top:0;z-index:50;background:rgba(15,37,34,.72);backdrop-filter:var(--blur);border-bottom:1px solid #ffffff12}
+.nav{display:flex;align-items:center;gap:.8rem;justify-content:space-between;padding:.9rem 0}
+.brand{display:flex;align-items:center;gap:.8rem;min-width:0}
+.logo{height:40px;width:auto;display:block}
+.brand h1{display:none}
+nav ul{display:flex;gap:.4rem;list-style:none;margin:0;padding:0}
+.nav-link{position:relative;display:inline-block;padding:.55rem .9rem;border-radius:12px;font-weight:600;opacity:.95}
+.nav-link:hover{background:#ffffff12;opacity:1}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#1a1a1a;padding:.72rem 1rem;border-radius:12px;font-weight:800;box-shadow:var(--shadow)}
+.dropdown-wrap{position:relative;display:none}
+.menu-toggle{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid #ffffff22;border-radius:12px;background:#0f2522;color:#fff}
+.menu-toggle svg{width:22px;height:22px;display:block}
+.dropdown-menu{position:absolute;left:0;right:0;top:calc(100% + 10px);background:rgba(10,26,24,.98);backdrop-filter:var(--blur);border:1px solid #ffffff18;border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.45);padding:8px;display:none}
+.dropdown-menu.open{display:block}
+.dropdown-menu ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:#0f211e;border:1px solid #ffffff12;font-weight:600}
+main{min-height:60vh}
+section{padding:72px 0;border-top:1px solid rgba(255,255,255,.06)}
+.section-title{font:700 2rem/1 Playfair Display,serif;margin:0 0 1rem}
+.muted{color:var(--muted)}
+.hero{position:relative;isolation:isolate}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://salonkee.cloud/lu/data/2043/coverImage/n-d7z60vBoOoO9mrWA0VYjL-sm--opt') center/cover no-repeat;filter:grayscale(.1) contrast(1.05) brightness(.6);z-index:-2}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(1200px 400px at 10% 0%, #ffd7a11a, #0000), linear-gradient(180deg, #0000, #0008 60%, #000a);z-index:-1}
+.hero-inner{padding:clamp(64px,10vw,120px) 0;display:grid;grid-template-columns:1.15fr .85fr;gap:2rem;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:.5rem;background:#ffffff10;border:1px solid #ffffff22;color:#fff;padding:.35rem .7rem;border-radius:999px;font-size:.85rem}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.card{background:var(--panel);border:1px solid #ffffff10;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.service{background:var(--panel-2);border:1px solid #ffffff10;border-radius:var(--radius);padding:1.2rem;display:flex;flex-direction:column;gap:.6rem}
+.chip{display:inline-block;font-size:.8rem;padding:.2rem .5rem;border:1px solid #ffffff22;border-radius:999px;color:#e8f0ee}
+.price{margin-left:auto;font-weight:800;color:#1a1a1a;background:linear-gradient(135deg,var(--brand),var(--brand-2));padding:.15rem .5rem;border-radius:10px}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.gallery img{height:200px;object-fit:cover;border-radius:14px;border:1px solid #ffffff10}
+.pricing{display:grid;grid-template-columns:1.25fr .75fr;gap:1.1rem}
+.price-card{background:radial-gradient(1200px 400px at -10% -40%, #ffd7a10a, #0000), var(--panel);border:1px solid #ffffff14;border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+.price-card h4{margin:.2rem 0 1rem;font:700 1.4rem/1.2 Playfair Display,serif}
+.price-item{display:flex;gap:.8rem;align-items:center;padding:.65rem .55rem;border-radius:12px;border:1px solid #ffffff0e;background:#0f211e}
+.price-item + .price-item{margin-top:.55rem}
+.price-name{font-weight:600}
+.price-time{margin-left:auto;font-size:.85rem;color:var(--muted)}
+.price-tag{margin-left:.5rem;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#1a1a1a;font-weight:800;padding:.2rem .6rem;border-radius:10px}
+.subtle{color:var(--muted);font-size:.95rem}
+.divider{height:1px;background:#ffffff14;margin:1rem 0;border-radius:1px}
+.badge-pill{display:inline-block;padding:.15rem .5rem;border-radius:999px;border:1px solid #ffffff26;color:#e7f0ee;font-size:.78rem}
+.legend{display:flex;gap:.5rem;flex-wrap:wrap}
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:1rem}
+.hours{width:100%;border-collapse:collapse}
+.hours td{padding:.5rem .4rem;border-bottom:1px dashed #ffffff18}
+.map{border:0;width:100%;height:380px;border-radius:var(--radius)}
+footer{padding:28px 0;color:#c9d7d4;border-top:1px solid rgba(255,255,255,.06)}
+.foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+@media (max-width:1024px){.hero-inner,.about,.services-grid,.pricing,.contact-grid{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:768px){nav{display:none}.cta-btn{display:none}.dropdown-wrap{display:block}.brand{flex:1}}
+@media (max-width:560px){.gallery{grid-template-columns:1fr;justify-items:center}.gallery img{height:auto;width:min(520px,100%)}}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand.png"/>
-        <h1>s Beauty Barber</h1>
-      </div>
+<header>
+  <div class="container nav">
+    <div class="brand">
+      <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand.png"
+           srcset="sbeauty-full-logo-sand@48h.png 1x, sbeauty-full-logo-sand@96h.png 2x, sbeauty-full-logo-sand@128h.png 3x">
+      <h1>s Beauty Barber</h1>
+    </div>
+    <div class="dropdown-wrap">
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M4 6h16M4 12h16M10 18h10"/>
+          <path d="M4 6h16M4 12h16M10 18h10"></path>
         </svg>
       </button>
-      <nav>
+      <div class="dropdown-menu" id="dropdownMenu" aria-hidden="true">
         <ul>
-          <li><a data-link href="/" class="nav-link">Home<div class="ripple"></div></a></li>
-          <li><a data-link href="/services" class="nav-link underline-anim">Services<div class="ripple"></div></a></li>
-          <li><a data-link href="/prices" class="nav-link underline-anim">Prices<div class="ripple"></div></a></li>
-          <li><a data-link href="/booking" class="nav-link underline-anim">Book<div class="ripple"></div></a></li>
-          <li><a data-link href="/contact" class="nav-link underline-anim">Contact<div class="ripple"></div></a></li>
+          <li><a data-link href="/">Home</a></li>
+          <li><a data-link href="/services">Services</a></li>
+          <li><a data-link href="/prices">Prices</a></li>
+          <li><a data-link href="/booking">Book</a></li>
+          <li><a data-link href="/contact">Contact</a></li>
         </ul>
-      </nav>
-      <a data-link href="/booking" class="cta-btn">Book now</a>
+      </div>
     </div>
-  
-  <div class="backdrop" id="menuBackdrop"></div>
-  <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <ul>
-      <li><a data-link href="/">Home</a></li>
-      <li><a data-link href="/services">Services</a></li>
-      <li><a data-link href="/prices">Prices</a></li>
-      <li><a data-link href="/booking">Book</a></li>
-      <li><a data-link href="/contact">Contact</a></li>
-    </ul>
-  </nav>
+    <nav>
+      <ul>
+        <li><a data-link href="/" class="nav-link">Home</a></li>
+        <li><a data-link href="/services" class="nav-link">Services</a></li>
+        <li><a data-link href="/prices" class="nav-link">Prices</a></li>
+        <li><a data-link href="/booking" class="nav-link">Book</a></li>
+        <li><a data-link href="/contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <a data-link href="/booking" class="cta-btn">Book now</a>
+  </div>
 </header>
 
-  <main id="app"></main>
+<main id="app"></main>
 
-  <footer>
-    <div class="container foot">
-      <div style="display:flex;align-items:center;gap:.6rem">
-        <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand.png"/>
-        <strong>s Beauty Barber</strong>
-      </div>
-      <div class="muted">© <span id="year"></span> s Beauty Barber. All rights reserved.</div>
+<footer>
+  <div class="container foot">
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <img class="logo" alt="s Beauty Barber" src="sbeauty-logo-sand.png"
+           srcset="sbeauty-full-logo-sand@48h.png 1x, sbeauty-full-logo-sand@96h.png 2x, sbeauty-full-logo-sand@128h.png 3x">
+      <strong>s Beauty Barber</strong>
     </div>
-  </footer>
+    <div class="muted">© <span id="year"></span> s Beauty Barber. All rights reserved.</div>
+  </div>
+</footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const app = document.getElementById('app');
-
-    const Views = {
-  '/': `
-    <section class="hero view active">
-      <div class="container hero-inner">
-        <div>
-          <span class="badge"><span class="dot"></span> Esch-sur-Alzette • Luxembourg</span>
-          <h2 style="font-family:'Playfair Display',serif;font-weight:700">Classic cuts. Modern craft.<br/>Relaxed atmosphere.</h2>
-          <p class="muted">Welcome to <strong>s Beauty Barber</strong>. Expert fades, razor shaves, beard design, plus premium care and a calm setting.</p>
-          <div class="hero-actions">
-            <a class="cta-btn" data-link href="/booking">Book an appointment</a>
-            <a class="nav-link" data-link href="/services">Explore services<div class="ripple"></div></a>
-          </div>
-        </div>
-        <div>
-          <img src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOodEVMdr0VYjL-sm--opt" alt="S Beauty Barber interior" style="border-radius:18px;border:1px solid #ffffff18;box-shadow:var(--shadow)">
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container about">
-        <div class="card hover-rise">
-          <h3 class="section-title">The Experience</h3>
-          <p class="muted">Unhurried appointments. Hot towel finishes. Complimentary coffee or tea. Every detail for comfort.</p>
-        </div>
-        <div class="card hover-rise">
-          <h3 class="section-title">Our Craft</h3>
-          <p class="muted">From skin fades to scissor cuts and beard sculpting. Tailored to face shape and routine.</p>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h3 class="section-title">Gallery</h3>
-        <p class="muted">A glimpse of our space.</p>
-        <div class="gallery" style="margin-top:10px">
-          <img alt="Shop interior" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOo7Dn6mP0VYjL-sm--opt"/>
-          <img alt="Stations" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOoo1LjXm0VYjL-sm--opt"/>
-          <img alt="Mirrors" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOoEW1don0VYjL-sm--opt"/>
-          <img alt="Products" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOj1pGoVQ0VYjL-sm--opt"/>
-        </div>
-      </div>
-    </section>
-  `,
-  '/services': `
-    <section class="view active">
-      <div class="container">
-        <h3 class="section-title">Services</h3>
-        <p class="muted">Focused menu. Clear options. Consistent results.</p>
-        <div class="services-grid" style="margin-top:12px">
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">30–45 min</span><strong>Coupe Homme</strong><span class="price">25 €</span></div><p class="muted">Consultation, cut, finish.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">45–60 min</span><strong>Coupe Homme & Shampoing</strong><span class="price">26 €</span></div><p class="muted">Cut with wash and style.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">25–30 min</span><strong>Coupe Tondeuse</strong><span class="price">22 €</span></div><p class="muted">Clipper cut, clean finish.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">15–20 min</span><strong>Design Cheveux</strong><span class="price">5 €</span></div><p class="muted">Hair design details.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">40–60 min</span><strong>Barbe Tondeuse</strong><span class="price">14 €</span></div><p class="muted">Beard trim with clipper.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">40–60 min</span><strong>Barbe Contours</strong><span class="price">20 €</span></div><p class="muted">Contours and razor finish.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">40–60 min</span><strong>Barbe Complète</strong><span class="price">23 €</span></div><p class="muted">Full beard design.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">—</span><strong>Coupe Étudiant</strong><span class="price">22 €</span></div><p class="muted">Student pricing.</p></div>
-          <div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">—</span><strong>Coupe Enfant (1–10)</strong><span class="price">18 €</span></div><p class="muted">Gentle and precise.</p></div>
-        </div>
-      </div>
-    </section>
-  `,
-  '/prices': `
-    <section class="view active">
-      <div class="container pricing">
-        <div class="price-card hover-rise">
-          <div class="legend" style="margin-bottom:.6rem">
-            <span class="badge-pill">Hair</span>
-            <span class="badge-pill">Beard</span>
-            <span class="badge-pill">Color & Care</span>
-            <span class="badge-pill">Kids & Students</span>
-          </div>
-          <h4>Popular services</h4>
-          <div class="price-item">
-            <span class="price-name">Coupe Homme</span>
-            <span class="price-tag">25 €</span>
-            <span class="price-time">30–45 min</span>
-          </div>
-          <div class="price-item">
-            <span class="price-name">Coupe Homme & Shampoing</span>
-            <span class="price-tag">26 €</span>
-            <span class="price-time">45–60 min</span>
-          </div>
-          <div class="price-item">
-            <span class="price-name">Coupe Tondeuse</span>
-            <span class="price-tag">22 €</span>
-            <span class="price-time">25–30 min</span>
-          </div>
-          <div class="divider"></div>
-          <h4>Beard</h4>
-          <div class="price-item"><span class="price-name">Barbe Tondeuse</span><span class="price-tag">14 €</span><span class="price-time">40–60 min</span></div>
-          <div class="price-item"><span class="price-name">Barbe Contours</span><span class="price-tag">20 €</span><span class="price-time">40–60 min</span></div>
-          <div class="price-item"><span class="price-name">Barbe Complète</span><span class="price-tag">23 €</span><span class="price-time">40–60 min</span></div>
-        </div>
-
-        <aside class="price-card hover-rise">
-          <h4>Color & Treatments</h4>
-          <div class="price-item"><span class="price-name">Coloration Homme</span><span class="price-tag">35 €</span></div>
-          <div class="price-item"><span class="price-name">Mèches</span><span class="price-tag">60 €</span></div>
-          <div class="price-item"><span class="price-name">Patine</span><span class="price-tag">40 €</span></div>
-          <div class="price-item"><span class="price-name">Décoloration</span><span class="price-tag">20 €</span></div>
-          <div class="price-item"><span class="price-name">Lissage Kératine</span><span class="price-tag">70 €</span></div>
-          <div class="price-item"><span class="price-name">Permanente Homme</span><span class="price-tag">60 €</span></div>
-          <div class="price-item"><span class="price-name">Soin Botox</span><span class="price-tag">60 €</span></div>
-          <div class="divider"></div>
-          <h4>Kids & Students</h4>
-          <div class="price-item"><span class="price-name">Coupe Étudiant</span><span class="price-tag">22 €</span></div>
-          <div class="price-item"><span class="price-name">Coupe Enfant (1–10 ans)</span><span class="price-tag">18 €</span></div>
-          <div class="divider"></div>
-          <h4>Extras</h4>
-          <div class="price-item"><span class="price-name">Design Cheveux</span><span class="price-tag">5 €</span></div>
-          <div class="price-item"><span class="price-name">Coloration Barbe</span><span class="price-tag">20 €</span></div>
-          <div class="price-item"><span class="price-name">Épilation Sourcils Fil</span><span class="price-tag">15 €</span></div>
-          <div class="price-item"><span class="price-name">Masque Noir Visage</span><span class="price-tag">10 €</span></div>
-          <p class="subtle" style="margin:.9rem 0 0">Subject to change. Latest prices on Salonkee.</p>
-        </aside>
-      </div>
-    </section>
-  `,
-  '/booking': `
-    <section class="view active">
-      <div class="container booking">
-        <div>
-          <h3 class="section-title">Book an Appointment</h3>
-          <p class="muted">Book via Salonkee for live availability and instant confirmation.</p>
-          <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin:8px 0 16px">
-            <a class="cta-btn" href="https://salonkee.lu/salon/sbeauty-barber-shop?lang=en" target="_blank" rel="noopener">Book via Salonkee</a>
-            <a class="nav-link" data-link href="/contact">Call us<div class="ripple"></div></a>
-          </div>
-          <div class="card hover-rise" style="margin-top:12px">
-            <h4 style="margin:0 0 .4rem">Prefer to call?</h4>
-            <p class="muted" style="margin:0">Phone <a href="tel:+35228990851">+352 28990851</a>. We answer during opening hours.</p>
-          </div>
-        </div>
-        <div class="card hover-rise">
-          <h4 style="margin:0 0 .4rem">Good to know</h4>
-          <ul class="muted" style="margin:0;padding-left:1.1rem">
-            <li>Please arrive 5 minutes early.</li>
-            <li>Free cancellations up to 3 hours before.</li>
-            <li>Card and cash accepted.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  `,
-  '/contact': `
-    <section class="view active">
-      <div class="container contact-grid">
-        <div class="card hover-rise">
-          <h3 class="section-title">Contact & Hours</h3>
-          <p><strong>Address</strong><br>35, Xavier Brasseur, Esch-sur-Alzette L-4040, Luxembourg</p>
-          <p><strong>Phone</strong> <a href="tel:+35228990851">+352 28990851</a><br>
-             <strong>Email</strong> <a href="mailto:hello@sbeautybarber.lu">hello@sbeautybarber.lu</a></p>
-          <table class="hours">
-            <tr><td>Mon</td><td>10:00 – 19:00</td></tr>
-            <tr><td>Tue</td><td>10:00 – 19:00</td></tr>
-            <tr><td>Wed</td><td>10:00 – 19:00</td></tr>
-            <tr><td>Thu</td><td>10:00 – 19:00</td></tr>
-            <tr><td>Fri</td><td>09:00 – 19:00</td></tr>
-            <tr><td>Sat</td><td>09:00 – 19:00</td></tr>
-            <tr><td>Sun</td><td>Closed</td></tr>
-          </table>
-          <p style="margin-top:.8rem" class="muted">Walk-ins welcome when available. Appointments recommended.</p>
-        </div>
-        <div>
-          <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=35,%20xavier%20brasseur,%20Esch-sur-Alzette%20L-4040&output=embed"></iframe>
-        </div>
-      </div>
-    </section>
-  `
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const app = document.getElementById('app');
+const Views = {
+  "/": `<section class="hero"><div class="container hero-inner"><div><span class="badge"><span class="dot"></span> Esch-sur-Alzette • Luxembourg</span><h2 style="font-family:'Playfair Display',serif;font-weight:700">Classic cuts. Modern craft.<br>Relaxed atmosphere.</h2><p class="muted">Welcome to <strong>s Beauty Barber</strong>. Expert fades, razor shaves, beard design.</p><div style="display:flex;gap:.6rem;flex-wrap:wrap"><a class="cta-btn" data-link href="/booking">Book an appointment</a><a class="nav-link" data-link href="/services">Explore services</a></div></div><div><img src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOodEVMdr0VYjL-sm--opt" alt="Interior" style="border-radius:18px;border:1px solid #ffffff18;box-shadow:var(--shadow)"></div></div></section><section><div class="container about"><div class="card"><h3 class="section-title">The Experience</h3><p class="muted">Unhurried appointments. Hot towel finishes.</p></div><div class="card"><h3 class="section-title">Our Craft</h3><p class="muted">From skin fades to scissor cuts and beard sculpting.</p></div></div></section><section><div class="container"><h3 class="section-title">Gallery</h3><p class="muted">A glimpse of our space.</p><div class="gallery" style="margin-top:10px"><img alt="Shop interior" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOo7Dn6mP0VYjL-sm--opt"><img alt="Stations" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOoo1LjXm0VYjL-sm--opt"><img alt="Mirrors" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOoEW1don0VYjL-sm--opt"><img alt="Products" src="https://salonkee.cloud/lu/data/2043/marketingImages/n-d7z60vBoOj1pGoVQ0VYjL-sm--opt"></div></div></section>`,
+  "/services": `<section><div class="container"><h3 class="section-title">Services</h3><p class="muted">Focused menu. Clear options. Consistent results.</p><div class="services-grid" style="margin-top:12px"><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">30–45 min</span><strong>Coupe Homme</strong><span class="price">25 €</span></div><p class="muted">Consultation, cut, finish.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">45–60 min</span><strong>Coupe Homme &amp; Shampoing</strong><span class="price">26 €</span></div><p class="muted">Cut with wash and style.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">25–30 min</span><strong>Coupe Tondeuse</strong><span class="price">22 €</span></div><p class="muted">Clipper cut, clean finish.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">15–20 min</span><strong>Design Cheveux</strong><span class="price">5 €</span></div><p class="muted">Hair design details.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">40–60 min</span><strong>Barbe Tondeuse</strong><span class="price">14 €</span></div><p class="muted">Beard trim with clipper.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">40–60 min</span><strong>Barbe Contours</strong><span class="price">20 €</span></div><p class="muted">Contours and razor finish.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">40–60 min</span><strong>Barbe Complète</strong><span class="price">23 €</span></div><p class="muted">Full beard design.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">—</span><strong>Coupe Étudiant</strong><span class="price">22 €</span></div><p class="muted">Student pricing.</p></div><div class="service"><div style="display:flex;gap:.6rem;align-items:center"><span class="chip">—</span><strong>Coupe Enfant (1–10)</strong><span class="price">18 €</span></div><p class="muted">Gentle and precise.</p></div></div></div></section>`,
+  "/prices": `<section><div class="container pricing"><div class="price-card"><div class="legend" style="margin-bottom:.6rem"><span class="badge-pill">Hair</span><span class="badge-pill">Beard</span><span class="badge-pill">Color &amp; Care</span><span class="badge-pill">Kids &amp; Students</span></div><h4>Popular services</h4><div class="price-item"><span class="price-name">Coupe Homme</span><span class="price-tag">25 €</span><span class="price-time">30–45 min</span></div><div class="price-item"><span class="price-name">Coupe Homme &amp; Shampoing</span><span class="price-tag">26 €</span><span class="price-time">45–60 min</span></div><div class="price-item"><span class="price-name">Coupe Tondeuse</span><span class="price-tag">22 €</span><span class="price-time">25–30 min</span></div><div class="divider"></div><h4>Beard</h4><div class="price-item"><span class="price-name">Barbe Tondeuse</span><span class="price-tag">14 €</span><span class="price-time">40–60 min</span></div><div class="price-item"><span class="price-name">Barbe Contours</span><span class="price-tag">20 €</span><span class="price-time">40–60 min</span></div><div class="price-item"><span class="price-name">Barbe Complète</span><span class="price-tag">23 €</span><span class="price-time">40–60 min</span></div></div><aside class="price-card"><h4>Color &amp; Treatments</h4><div class="price-item"><span class="price-name">Coloration Homme</span><span class="price-tag">35 €</span></div><div class="price-item"><span class="price-name">Mèches</span><span class="price-tag">60 €</span></div><div class="price-item"><span class="price-name">Patine</span><span class="price-tag">40 €</span></div><div class="price-item"><span class="price-name">Décoloration</span><span class="price-tag">20 €</span></div><div class="price-item"><span class="price-name">Lissage Kératine</span><span class="price-tag">70 €</span></div><div class="price-item"><span class="price-name">Permanente Homme</span><span class="price-tag">60 €</span></div><div class="price-item"><span class="price-name">Soin Botox</span><span class="price-tag">60 €</span></div><div class="divider"></div><h4>Kids &amp; Students</h4><div class="price-item"><span class="price-name">Coupe Étudiant</span><span class="price-tag">22 €</span></div><div class="price-item"><span class="price-name">Coupe Enfant (1–10 ans)</span><span class="price-tag">18 €</span></div><div class="divider"></div><h4>Extras</h4><div class="price-item"><span class="price-name">Design Cheveux</span><span class="price-tag">5 €</span></div><div class="price-item"><span class="price-name">Coloration Barbe</span><span class="price-tag">20 €</span></div><div class="price-item"><span class="price-name">Épilation Sourcils Fil</span><span class="price-tag">15 €</span></div><div class="price-item"><span class="price-name">Masque Noir Visage</span><span class="price-tag">10 €</span></div><p class="subtle" style="margin:.9rem 0 0">Subject to change. Latest prices on Salonkee.</p></aside></div></section>`,
+  "/booking": `<section><div class="container" style="display:grid;gap:1rem"><div><h3 class="section-title">Book an Appointment</h3><p class="muted">Book via Salonkee for live availability and instant confirmation.</p><div style="display:flex;gap:.6rem;flex-wrap:wrap;margin:8px 0 16px"><a class="cta-btn" href="https://salonkee.lu/salon/sbeauty-barber-shop?lang=en" target="_blank" rel="noopener">Book via Salonkee</a><a class="nav-link" data-link href="/contact">Call us</a></div></div><div class="card"><h4 style="margin:0 0 .4rem">Good to know</h4><ul class="muted" style="margin:0;padding-left:1.1rem"><li>Please arrive 5 minutes early.</li><li>Free cancellations up to 3 hours before.</li><li>Card and cash accepted.</li></ul></div></div></section>`,
+  "/contact": `<section><div class="container contact-grid"><div class="card"><h3 class="section-title">Contact &amp; Hours</h3><p><strong>Address</strong><br>35, Xavier Brasseur, Esch-sur-Alzette L-4040, Luxembourg</p><p><strong>Phone</strong> <a href="tel:+35228990851">+352 28990851</a><br><strong>Email</strong> <a href="mailto:hello@sbeautybarber.lu">hello@sbeautybarber.lu</a></p><table class="hours"><tr><td>Mon</td><td>10:00 – 19:00</td></tr><tr><td>Tue</td><td>10:00 – 19:00</td></tr><tr><td>Wed</td><td>10:00 – 19:00</td></tr><tr><td>Thu</td><td>10:00 – 19:00</td></tr><tr><td>Fri</td><td>09:00 – 19:00</td></tr><tr><td>Sat</td><td>09:00 – 19:00</td></tr><tr><td>Sun</td><td>Closed</td></tr></table><p class="muted" style="margin-top:.8rem">Walk-ins welcome when available. Appointments recommended.</p></div><div><iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=35,%20xavier%20brasseur,%20Esch-sur-Alzette%20L-4040&output=embed"></iframe></div></div></section>`
 };
 
-    const routes = Object.keys(Views);
-
-    // Smoke tests
-    (function(){
-      const placeholdersGone = !JSON.stringify(Views).includes('$1') && !JSON.stringify(Views).includes('$2');
-      console.assert(placeholdersGone, 'Placeholder tokens must not exist.');
-      ['/', '/services', '/prices', '/booking', '/contact'].forEach(p=>{
-        console.assert(typeof Views[p] === 'string' && Views[p].includes('<section'), 'Route missing or invalid view: ' + p);
-      });
-    })();
-
-    function render(path){
-      const view = Views[path] || Views['/'];
-      app.innerHTML = view;
-      const io = ('IntersectionObserver' in window) ? new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('in')), {threshold:.08}) : null;
-      if(io){ app.querySelectorAll('.fade-up, .card').forEach(el=>{el.classList.add('fade-up'); io.observe(el);}); }
-      requestAnimationFrame(()=>{
-        app.querySelectorAll('.view').forEach(v=>v.classList.add('active'));
-      });
-      attachInteractions();
-    }
-
-    function onNav(e){
-      const a = e.target.closest('[data-link]');
-      if(!a) return;
-      const url = new URL(a.href, location.origin);
-      if(url.origin === location.origin){
-        e.preventDefault();
-        navigate(url.pathname);
-      }
-    }
-
-    function attachInteractions(){
-      const toggle = document.getElementById('menuToggle');
-      const sheet = document.getElementById('mobileMenu');
-      const backdrop = document.getElementById('menuBackdrop');
-      function openMenu(){
-        if(!toggle||!sheet) return;
-        sheet.classList.add('open'); backdrop.classList.add('show');
-        toggle.setAttribute('aria-expanded','true'); sheet.setAttribute('aria-hidden','false');
-        document.body.style.overflow='hidden';
-      }
-      function closeMenu(){
-        if(!toggle||!sheet) return;
-        sheet.classList.remove('open'); backdrop.classList.remove('show');
-        toggle.setAttribute('aria-expanded','false'); sheet.setAttribute('aria-hidden','true');
-        document.body.style.overflow='';
-      }
-      if(toggle){ toggle.onclick = (e)=>{
-        const isOpen = sheet && sheet.classList.contains('open');
-        if(isOpen) closeMenu(); else openMenu();
-        e.stopPropagation();
-      };}
-      if(backdrop){ backdrop.onclick = closeMenu; }
-      window.addEventListener('resize', ()=>{ if(innerWidth>768) closeMenu(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
-
-      // Close on in-app navigation
-      document.querySelectorAll('.mobile-menu a[data-link]').forEach(a=>{
-        a.addEventListener('click', ()=> closeMenu());
-      });
-
-      document.querySelectorAll('.nav-link').forEach(link=>{
-        link.addEventListener('click', (e)=>{
-          const r = link.querySelector('.ripple');
-          if(!r) return;
-          const s = document.createElement('span');
-          const rect = link.getBoundingClientRect();
-          s.style.left = (e.clientX - rect.left) + 'px';
-          s.style.top  = (e.clientY - rect.top) + 'px';
-          r.appendChild(s);
-          setTimeout(()=>s.remove(), 500);
-        });
-      });
-    }
-
-    window.addEventListener('click', onNav);
-    window.addEventListener('popstate', ()=> navigate(location.pathname, true));
-
-    function navigate(path, fromPop){
-      if(window.sbbMenu) window.sbbMenu.close();
-      if(window.sbbMenu) window.sbbMenu.close();
-      const sheet = document.getElementById('mobileMenu'); const bd = document.getElementById('menuBackdrop');
-      if(sheet){ sheet.classList.remove('open'); } if(bd){ bd.classList.remove('show'); } document.body.style.overflow='';
-      const go = ()=>{ if(!fromPop) history.pushState({}, '', path); render(path); };
-      const vt = document.startViewTransition ? document.startViewTransition(go) : null;
-      if(!vt) go();
-    }
-
-    if(!routes.includes(location.pathname)) history.replaceState({}, '', '/');
-    render(location.pathname);
-
-    // Robust mobile menu setup
-    (function setupMobileMenu(){
-      const toggle = document.getElementById('menuToggle');
-      const sheet = document.getElementById('mobileMenu');
-      const backdrop = document.getElementById('menuBackdrop');
-      function openMenu(){
-        if(!sheet) return;
-        sheet.classList.add('open'); if(backdrop) backdrop.classList.add('show');
-        if(toggle) toggle.setAttribute('aria-expanded','true');
-        if(sheet) sheet.setAttribute('aria-hidden','false');
-        document.body.style.overflow='hidden';
-      }
-      function closeMenu(){
-        if(!sheet) return;
-        sheet.classList.remove('open'); if(backdrop) backdrop.classList.remove('show');
-        if(toggle) toggle.setAttribute('aria-expanded','false');
-        if(sheet) sheet.setAttribute('aria-hidden','true');
-        document.body.style.overflow='';
-      }
-      window.sbbMenu = { open: openMenu, close: closeMenu };
-      if(toggle){ toggle.addEventListener('click', (e)=>{ e.stopPropagation(); (sheet.classList.contains('open')?closeMenu:openMenu)();}); }
-      if(backdrop){ backdrop.addEventListener('click', closeMenu); }
-      document.addEventListener('click', (e)=>{ if(e.target.closest('.mobile-menu a[data-link]')) closeMenu(); }, true);
-      window.addEventListener('resize', ()=>{ if(innerWidth>768) closeMenu(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
-    })();
-
-  </script>
+function render(path){ const view = Views[path] || Views["/"]; app.innerHTML = view; bindDropdown(); }
+function onNav(e){ const a = e.target.closest("[data-link]"); if(!a) return; const url = new URL(a.href, location.origin); if(url.origin === location.origin){ e.preventDefault(); navigate(url.pathname); } }
+function bindDropdown(){ const t=document.getElementById("menuToggle"); const m=document.getElementById("dropdownMenu"); function close(){ if(m){ m.classList.remove("open"); m.setAttribute("aria-hidden","true"); } if(t){ t.setAttribute("aria-expanded","false"); } } function open(){ if(m){ m.classList.add("open"); m.setAttribute("aria-hidden","false"); } if(t){ t.setAttribute("aria-expanded","true"); } } if(t && m){ t.onclick=(ev)=>{ ev.stopPropagation(); m.classList.contains("open")?close():open(); }; document.addEventListener("click",(ev)=>{ if(!ev.target.closest(".dropdown-wrap")) close(); }); window.addEventListener("resize",()=>{ if(innerWidth>768) close(); }); document.addEventListener("keydown",(ev)=>{ if(ev.key==="Escape") close(); }); m.querySelectorAll("a[data-link]").forEach(a=> a.addEventListener("click", close)); } }
+window.addEventListener("click", onNav);
+window.addEventListener("popstate", ()=> navigate(location.pathname, true));
+function navigate(path, fromPop){ if(!fromPop) history.pushState({}, "", path); const m=document.getElementById("dropdownMenu"); if(m){ m.classList.remove("open"); m.setAttribute("aria-hidden","true"); } const t=document.getElementById("menuToggle"); if(t){ t.setAttribute("aria-expanded","false"); } render(path); }
+if(!Object.keys(Views).includes(location.pathname)) history.replaceState({}, "", "/");
+render(location.pathname);
+</script>
 </body>
 </html>
